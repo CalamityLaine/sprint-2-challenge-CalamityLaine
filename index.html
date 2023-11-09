@@ -138,7 +138,7 @@
     }
 
     // 👉 CHALLENGE 3
-    function booleanize() {
+    function booleanize(inputObject) {
       // 🧠 booleanize takes an object as its single argument, which can have any number of properties
       // Loop over the properties and then return the object, after applying the following transformations:
       //    * If a value is the number zero, it must be transformed into the Boolean false
@@ -147,6 +147,21 @@
       // 🧠 Edge cases:
       //    * If a property name exceeds 9 characters, return the string "shorten all prop names to 9 chars or less"
       // 🌟 HINT: careful not to perform any unintended changes on the object
+    const transformedObject = {};
+    for (const key in inputObject) {
+      if (key.length > 9) {
+        return "shorten all prop names to 9 chars or less";
+      }
+    const value = inputObject[key];
+    if (value === 0) {
+      transformedObject[key] = false;
+    } else if (value === 1) {
+      transformedObject[key] = true;
+    }  else if ( value !== null) {
+      transformedObject[key] = value;
+    }
+    }
+    return transformedObject;
     }
 
     // 👉 CHALLENGE 4
