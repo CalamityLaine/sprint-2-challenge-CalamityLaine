@@ -207,24 +207,25 @@
       // 🌟 HINT: instead of looping over the number's digits, loop backwards over a template "(XXX) XXX-XXXX"
       // 🌟 HINT: at each iteration, if the current character is an "X", replace it with the result of popping a digit from the number
       // 🌟 HINT: if you'd rather loop forwards, use `shift` instead of `pop`
-    if (number.length !== 10 || !/^\d{10}$/.test(number)) {
+    if (number.length !== 10) {
       return "type a 10-digit number";
     }
-    if (!/^\d+$/.test(number)) {
-     return "invalid phone number";
-    }
-    const template = "(XXX) XXX-XXXX";
-    let normalizedNumber = "";
 
-    for (let i = 0; i < template.length; i++) {
-      if (template[i] === 'X') {
-        normalizedNumber += number[0];
-        number = number.slice(1);
-      } else {
-       normalizedNumber += template[i];
+    for (let i = 0; i < number.length; i++) {
+      if (number[i] < '0' || number[i] > '9') {
+        return "invalid phone number";
       }
     }
-    return normalizedNumber;
+    const template = "(XXX) XXX-XXXX";
+    const normalizedNumber = template.split("");
+
+    for (let i = 0; i < normalizedNumber.length; i++) {
+      if (normalizedNumber[i] === 'X') {
+        normalizedNumber[i] = number.charAt(0);
+        number = number.substring(1);
+      }
+    }
+    return normalizedNumber.join("");
     }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
